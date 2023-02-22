@@ -3,11 +3,11 @@ dotenv.config();
 
 import { connectDB } from './db/connect';
 import { bookModel } from './models/books';
-import { BooksData } from '../books';
+import { BooksData } from './books';
 
 const start = async() => {
       try{
-            await connectDB(process.env.MONGO_URI as string);
+            await connectDB();
             await bookModel.deleteMany()
             await bookModel.create(BooksData)
             console.log('Database populated')

@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 
 import { connectDB } from './db/connect';
-import { booksRouter } from './routes/books'
+import { router } from './routes/books';
 
 dotenv.config();
 
@@ -19,11 +19,11 @@ app.get('/', (req: Request, res: Response) => {
       res.send('<h1>Hello from the TypeScript world!</h1>');
 });
 
-app.use('/api/v1/books', booksRouter);
+app.use('/api/v1/books', router);
 
 const start = async () => {
       try{
-            await connectDB(process.env.MONGO_URI as string);
+            await connectDB();
             app.listen(PORT, () => console.log(`Server is listening port ${PORT}...`));
       } catch (error) {
             console.log(error)
